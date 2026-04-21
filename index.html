@@ -1048,6 +1048,19 @@
             }
         });
     });
+
+    // Fix gallery scroll trap — let vertical wheel events pass through to page
+    const galleryTrack = document.querySelector('.gallery-track');
+    if (galleryTrack) {
+        galleryTrack.addEventListener('wheel', (e) => {
+            // If user is scrolling vertically, don't trap them in the gallery
+            if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                // Let the page scroll vertically (don't prevent default)
+                // But also nudge gallery horizontally for a nice effect
+                galleryTrack.scrollLeft += e.deltaY * 0.5;
+            }
+        }, { passive: true });
+    }
 </script>
 
 </body>
