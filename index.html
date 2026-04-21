@@ -151,6 +151,7 @@
       height: auto;
       filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.2));
       animation: float 3s ease-in-out infinite;
+      mix-blend-mode: multiply;
     }
 
     @keyframes float {
@@ -255,6 +256,12 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      filter: saturate(1.1) contrast(1.05);
+      transition: filter 0.3s ease;
+    }
+
+    .world-item:hover img {
+      filter: saturate(1.3) contrast(1.1);
     }
 
     .product-section {
@@ -290,6 +297,7 @@
       height: auto;
       filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.4));
       animation: pulse-glow 2s ease-in-out infinite;
+      mix-blend-mode: multiply;
     }
 
     @keyframes pulse-glow {
@@ -335,7 +343,9 @@
 
     .ingredients-section {
       padding: 5rem 2rem;
-      background: linear-gradient(135deg, #f5e1f0 0%, #e8d4e8 100%);
+      background: linear-gradient(135deg, var(--pink) 0%, #f0c0d0 100%);
+      border-top: 3px solid var(--teal);
+      border-bottom: 3px solid var(--teal);
     }
 
     .ingredients-section h2 {
@@ -400,8 +410,9 @@
     }
 
     .ingredient-card p {
-      color: #666;
+      color: var(--burgundy);
       font-size: 0.95rem;
+      opacity: 0.8;
     }
 
     .ugc-section {
@@ -529,8 +540,9 @@
     }
 
     .step p {
-      color: #666;
+      color: var(--burgundy);
       font-size: 0.95rem;
+      opacity: 0.7;
     }
 
     .step::after {
@@ -579,6 +591,14 @@
     .comparison-card.other {
       background: rgba(92, 26, 42, 0.6);
       border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .comparison-card.other .comparison-item {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .comparison-card.dreamcore .comparison-item {
+      color: var(--softwhite);
     }
 
     .comparison-card.dreamcore {
@@ -671,6 +691,8 @@
     .pricing-section {
       padding: 5rem 2rem;
       background: var(--softwhite);
+      border-top: 3px solid var(--teal);
+      border-bottom: 3px solid var(--teal);
     }
 
     .pricing-section h2 {
@@ -692,6 +714,29 @@
       border-radius: 15px;
       text-align: center;
       transition: transform 0.3s ease;
+    }
+
+    .pricing-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing-card:not(.featured) h3 {
+      color: var(--burgundy);
+    }
+
+    .pricing-card.featured h3 {
+      color: var(--cream);
+    }
+
+    .pricing-card:not(.featured) .pricing-subtitle {
+      color: var(--burgundy);
+      opacity: 0.8;
+    }
+
+    .pricing-card.featured .pricing-subtitle {
+      color: rgba(255, 255, 255, 0.9);
     }
 
     .pricing-card.featured {
@@ -823,6 +868,7 @@
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
+      background-color: var(--darkbg);
     }
 
     .final-cta-section::before {
