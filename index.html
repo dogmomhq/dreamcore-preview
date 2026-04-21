@@ -190,7 +190,7 @@
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
-            overscroll-behavior-x: contain;
+            pointer-events: auto;
         }
         
         .gallery-track::-webkit-scrollbar { display: none; }
@@ -1051,18 +1051,17 @@
         });
     });
 
-    // Fix gallery scroll trap — convert vertical wheel to horizontal scroll on gallery
-    // and ensure vertical page scroll continues
+    // Fix gallery scroll trap — intercept wheel on gallery-track to prevent scroll hijack
     const galleryTrack = document.querySelector('.gallery-track');
     if (galleryTrack) {
-        galleryTrack.addEventListener('wheel', (e) => {
-            if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-                e.preventDefault();
-                // Scroll gallery horizontally
-                galleryTrack.scrollLeft += e.deltaY;
-                // Also scroll the page vertically so user isn't trapped
-                window.scrollBy(0, e.deltaY);
-            }
+        galleryTrack.addEventListener('wheel', function(e) {
+            // Always prevent the gallery-track from handling the wheel event
+            e.preventDefault();
+            e.stopPropagation();
+            // Scroll gallery horizontally (nice UX bonus)
+            galleryTrack.scrollLeft += (e.deltaX || e.deltaY) * 0.5;
+            // Manually scroll the page vertically
+            window.scrollBy(0, e.deltaY);
         }, { passive: false });
     }
 </script>
