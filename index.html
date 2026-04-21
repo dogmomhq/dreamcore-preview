@@ -292,7 +292,8 @@
         }
 
         .badge {
-            background: rgba(244, 167, 185, 0.15);
+            background: rgba(244, 167, 185, 0.18);
+            border: 1px solid rgba(168, 216, 200, 0.25);
             border-left: 4px solid var(--teal);
             padding: 20px;
             border-radius: 8px;
@@ -762,14 +763,14 @@
 
         /* ===== SCROLL REVEAL ===== */
         .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+            opacity: 1;
         }
 
         .reveal.visible {
-            opacity: 1;
             transform: translateY(0);
+            opacity: 1;
         }
 
         /* ===== RESPONSIVE ===== */
