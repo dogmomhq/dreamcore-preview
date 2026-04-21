@@ -186,9 +186,11 @@
             gap: 20px;
             padding: 0 40px;
             overflow-x: auto;
+            overflow-y: hidden;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
+            overscroll-behavior-x: contain;
         }
         
         .gallery-track::-webkit-scrollbar { display: none; }
@@ -1049,17 +1051,19 @@
         });
     });
 
-    // Fix gallery scroll trap — let vertical wheel events pass through to page
+    // Fix gallery scroll trap — convert vertical wheel to horizontal scroll on gallery
+    // and ensure vertical page scroll continues
     const galleryTrack = document.querySelector('.gallery-track');
     if (galleryTrack) {
         galleryTrack.addEventListener('wheel', (e) => {
-            // If user is scrolling vertically, don't trap them in the gallery
             if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-                // Let the page scroll vertically (don't prevent default)
-                // But also nudge gallery horizontally for a nice effect
-                galleryTrack.scrollLeft += e.deltaY * 0.5;
+                e.preventDefault();
+                // Scroll gallery horizontally
+                galleryTrack.scrollLeft += e.deltaY;
+                // Also scroll the page vertically so user isn't trapped
+                window.scrollBy(0, e.deltaY);
             }
-        }, { passive: true });
+        }, { passive: false });
     }
 </script>
 
